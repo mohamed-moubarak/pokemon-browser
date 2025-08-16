@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
-import PaginatedList from 'pages/paginated-list/paginated-list';
+import PaginatedList from 'screens/paginated-list/paginated-list';
 import PaginatedGridSkeleton from 'components/PokemonGridSkeleton/pokemon-grid.skeleton';
 import Link from 'next/link';
 import ReactQueryProvider from 'providers/react-query.provider';
-import ScrollList from 'pages/scroll-list/scroll-list';
+import ScrollList from 'screens/scroll-list/scroll-list';
 import { PAGINATED_PAGE_SIZE } from 'constants/page-sizes';
 
 type Search = {
