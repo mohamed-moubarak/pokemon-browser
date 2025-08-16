@@ -1,6 +1,7 @@
 import { BriefCard } from 'components';
 import Link from 'next/link';
 import { getPokemonList } from 'services/pokemon-list';
+import './style.css';
 
 type PageProps = {
   page: number;
