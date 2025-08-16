@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { getPokemonDetails } from 'services';
 import Link from 'next/link';
 import { padNumber } from 'utils';
-import './style.css';
 
 type Params = { id: string };
 

@@ -6,7 +6,6 @@ import { useEffect, useRef } from 'react';
 import { BriefCard, InfiniteLoader, PaginatedGridSkeleton } from 'components';
 import { INFINITE_PAGE_SIZE } from 'constants/page-sizes';
 import { getPokemonListQuery } from 'services';
-import './style.css';
 
 export default function ScrollList() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, error } = useInfiniteQuery({

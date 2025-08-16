@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { getPokemonList } from 'services';
 import { artworkUrl, getIdFromUrl } from 'utils';
-import './style.css';
 
 type PageProps = {
   page: number;
