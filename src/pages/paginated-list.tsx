@@ -1,6 +1,6 @@
 import { BriefCard } from 'components';
 import Link from 'next/link';
-import { fetchPokemonList } from 'services/fetch-pokemon-list';
+import { getPokemonList } from 'services/pokemon-list';
 
 type PageProps = {
   page: number;
@@ -12,7 +12,7 @@ const img = (id: number) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
-  const { count, results, next, previous } = await fetchPokemonList(page, limit);
+  const { count, results, next, previous } = await getPokemonList(page, limit);
   const totalPages = Math.ceil(count / limit);
   const offset = (page - 1) * limit;
 

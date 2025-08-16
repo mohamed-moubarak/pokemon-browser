@@ -12,7 +12,7 @@ type PokemonBriefCardProps = {
 const BriefCard: React.FC<PokemonBriefCardProps> = ({ name, imageUrl, number }) => {
   return (
     <div className="border border-gray-200 rounded-lg p-4 bg-white">
-      <Link href={`/pokemon/${number}`} className="block">
+      <Link href={`/pokemon/${number}`} className="block cursor-pointer">
         <Image
           src={imageUrl}
           alt={name}
