@@ -4,8 +4,12 @@ import Link from 'next/link';
 import { padNumber } from 'utils/pad-number';
 import './style.css';
 
-export default async function PokemonDetailPage({ params }: { params: { id: string } }) {
-  const pokemon = await getPokemon(params.id);
+type Params = { id: string };
+
+export default async function PokemonDetailPage({ params }: { params: Promise<Params> }) {
+  const { id } = await params;
+  const pokemon = await getPokemon(id);
+
   const img =
     pokemon.sprites.other?.['official-artwork']?.front_default ??
     pokemon.sprites.front_default ??
@@ -93,18 +97,6 @@ export default async function PokemonDetailPage({ params }: { params: { id: stri
               ))}
             </ul>
 
-            {/* <div className="flex flex-wrap flex-col gap-2">
-              <h2 className="mb-2 text-lg font-semibold">Abilities</h2>
-
-              {pokemon.abilities.map((ability) => (
-                <span
-                  key={ability.ability.name}
-                  className="flex justify-center items-center px-3 py-1 bg-white border border-black text-black text-sm font-medium rounded-full capitalize"
-                >
-                  {ability.ability.name}
-                </span>
-              ))}
-            </div> */}
             <div className="flex flex-col justify-center items-start">
               <h2 className="mb-2 text-lg font-semibold">Abilities</h2>
 
@@ -130,47 +122,6 @@ export default async function PokemonDetailPage({ params }: { params: { id: stri
           </div>
         </article>
       </section>
-
-      {/* <section className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <h3 className="mt-6 text-xl font-semibold text-black mb-4">Base Stats</h3>
-
-          <ul className="space-y-2 text-sm">
-            {pokemon.stats.map((s) => (
-              <li key={s.stat.name} className="flex items-center flex-col w-full gap-1">
-                <div className="flex flex-row justify-between w-full">
-                  <span className="w-24 shrink-0 capitalize text-slate-700">{s.stat.name}</span>
-
-                  <span className="w-10 text-right tabular-nums">{s.base_stat}</span>
-                </div>
-
-                <div className="h-2 flex-1 rounded bg-slate-200 w-full">
-                  <div
-                    className="h-2 rounded bg-slate-700"
-                    style={{ width: `${Math.min(100, (s.base_stat / 180) * 100)}%` }}
-                    aria-label={`${s.stat.name} ${s.base_stat}`}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </section> */}
     </main>
   );
-}
-
-{
-  /* <dl className="grid grid-cols-2 gap-2 text-sm">
-            <dt className="text-slate-500">Types</dt>
-            <dd className="capitalize">{pokemon.types.map((t) => t.type.name).join(' • ')}</dd>
-            <dt className="text-slate-500">Height</dt>
-            <dd>{(pokemon.height / 10).toFixed(1)} m</dd>
-            <dt className="text-slate-500">Weight</dt>
-            <dd>{(pokemon.weight / 10).toFixed(1)} kg</dd>
-            <dt className="text-slate-500">Abilities</dt>
-            <dd className="capitalize">
-              {pokemon.abilities.map((a) => a.ability.name).join(', ')}
-            </dd>
-          </dl> */
 }
