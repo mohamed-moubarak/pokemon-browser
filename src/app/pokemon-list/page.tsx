@@ -1,17 +1,18 @@
 import { Suspense } from 'react';
-import PaginatedList from 'pages/paginated-list';
-import PaginatedGridSkeleton from 'pages/pokemon-grid.skelton';
-import './style.css';
+import PaginatedList from 'pages/paginated-list/paginated-list';
+import PaginatedGridSkeleton from 'pages/paginated-list/pokemon-grid.skelton';
 import Link from 'next/link';
+type Search = {
+  limit?: string;
+  page?: string;
+  mode?: string; // "infinite" | "paginated" | etc.
+};
 
-const PokemonListPaginatedPage = async ({
-  searchParams,
-}: {
-  searchParams?: { limit?: string; page?: string; mode?: string };
-}) => {
-  const page = Number(searchParams?.page ?? 1);
-  const limit = Number(searchParams?.limit ?? 20);
-  const mode = searchParams?.mode ?? 'pagination';
+const PokemonListPaginatedPage = async ({ searchParams }: { searchParams?: Promise<Search> }) => {
+  const { page: searchPage, limit: searchLimit, mode: searchMode } = (await searchParams) || {};
+  const page = Number(searchPage ?? 1);
+  const limit = Number(searchLimit ?? 20);
+  const mode = searchMode ?? 'pagination';
 
   return (
     <div className="font-sans flex flex-col items-center justify-items-center min-h-screen  min-w-screen p-6 gap-5 ">
@@ -43,7 +44,8 @@ const PokemonListPaginatedPage = async ({
 
       <main className="flex flex-col gap-8 items-center w-full xl:px-50 lg:px-30 md:px-16 px-12 flex-1">
         <Suspense fallback={<PaginatedGridSkeleton limit={limit} />}>
-          <PaginatedList page={page} limit={limit} />
+          {mode === 'pagination' && <PaginatedList page={page} limit={limit} />}
+          {/* {mode === 'infinite-scroll' && <InfiniteScrollList page={page} limit={limit} />} */}
         </Suspense>
       </main>
     </div>
