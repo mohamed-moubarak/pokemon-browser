@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { getPokemon } from 'services/pokemon-details';
 import Link from 'next/link';
 import { padNumber } from 'utils/pad-number';
-import './page.css';
+import './style.css';
 
 export default async function PokemonDetailPage({ params }: { params: { id: string } }) {
   const pokemon = await getPokemon(params.id);
