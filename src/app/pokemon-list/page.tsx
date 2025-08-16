@@ -1,17 +1,21 @@
 import { Suspense } from 'react';
 import PaginatedList from 'pages/paginated-list/paginated-list';
-import PaginatedGridSkeleton from 'pages/paginated-list/pokemon-grid.skelton';
+import PaginatedGridSkeleton from 'components/PokemonGridSkeleton/pokemon-grid.skeleton';
 import Link from 'next/link';
+import ReactQueryProvider from 'providers/react-query.provider';
+import ScrollList from 'pages/scroll-list/scroll-list';
+import { PAGINATED_PAGE_SIZE } from 'constants/page-sizes';
+
 type Search = {
   limit?: string;
   page?: string;
-  mode?: string; // "infinite" | "paginated" | etc.
+  mode?: string; // 'pagination' or 'infinite-scroll'
 };
 
 const PokemonListPaginatedPage = async ({ searchParams }: { searchParams?: Promise<Search> }) => {
   const { page: searchPage, limit: searchLimit, mode: searchMode } = (await searchParams) || {};
   const page = Number(searchPage ?? 1);
-  const limit = Number(searchLimit ?? 20);
+  const limit = Number(searchLimit ?? PAGINATED_PAGE_SIZE);
   const mode = searchMode ?? 'pagination';
 
   return (
@@ -35,7 +39,7 @@ const PokemonListPaginatedPage = async ({ searchParams }: { searchParams?: Promi
         </Link>
 
         <Link
-          href={`?page=${page}&limit=${limit}&mode=infinite-scroll`}
+          href={`?mode=infinite-scroll`}
           className={`px-3 py-1 text-sm rounded ${mode === 'infinite-scroll' ? 'bg-black text-white' : 'bg-[#FBFEFD] text-black hover:bg-black hover:text-white'}`}
         >
           Infinite Scroll
@@ -45,7 +49,8 @@ const PokemonListPaginatedPage = async ({ searchParams }: { searchParams?: Promi
       <main className="flex flex-col gap-8 items-center w-full xl:px-50 lg:px-30 md:px-16 px-12 flex-1">
         <Suspense fallback={<PaginatedGridSkeleton limit={limit} />}>
           {mode === 'pagination' && <PaginatedList page={page} limit={limit} />}
-          {/* {mode === 'infinite-scroll' && <InfiniteScrollList page={page} limit={limit} />} */}
+
+          <ReactQueryProvider>{mode === 'infinite-scroll' && <ScrollList />}</ReactQueryProvider>
         </Suspense>
       </main>
     </div>

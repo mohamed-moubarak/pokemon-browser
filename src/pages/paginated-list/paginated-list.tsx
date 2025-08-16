@@ -1,6 +1,8 @@
 import { BriefCard } from 'components';
 import Link from 'next/link';
-import { getPokemonList } from 'services/pokemon-list';
+
+import { getPokemonList } from 'services';
+import { artworkUrl, getIdFromUrl } from 'utils';
 import './style.css';
 
 type PageProps = {
@@ -8,19 +10,15 @@ type PageProps = {
   limit: number;
 };
 
-const getId = (u: string) => Number(u.match(/\/pokemon\/(\d+)\/?$/)![1]);
-const img = (id: number) =>
-  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
 const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
   const { count, results, next, previous } = await getPokemonList(page, limit);
   const totalPages = Math.ceil(count / limit);
   const offset = (page - 1) * limit;
 
   const pokemonList = results?.map((pokemon) => {
-    const id = getId(pokemon.url);
+    const id = getIdFromUrl(pokemon.url);
 
-    return { id, name: pokemon.name, image: img(id) };
+    return { id, name: pokemon.name, image: artworkUrl(id) };
   });
 
   if (!pokemonList || pokemonList.length === 0) {

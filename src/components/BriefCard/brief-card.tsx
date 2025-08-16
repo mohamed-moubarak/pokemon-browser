@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { padNumber } from 'utils/pad-number';
+import { padNumber } from 'utils';
 import Link from 'next/link';
 
 type PokemonBriefCardProps = {
@@ -17,7 +17,7 @@ const BriefCard: React.FC<PokemonBriefCardProps> = ({ name, imageUrl, number }) 
           src={imageUrl}
           alt={name}
           width={400}
-          height={200}
+          height={400}
           className="w-full object-cover bg-gray-50 px-8 py-4 rounded-lg mb-2"
         />
 

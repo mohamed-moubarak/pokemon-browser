@@ -1,6 +1,6 @@
 import { Pokemon } from 'types/pokemon';
 
-export const getPokemon = async (id: string): Promise<Pokemon> => {
+const getPokemon = async (id: string): Promise<Pokemon> => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 
   if (!response.ok) {
@@ -11,3 +11,5 @@ export const getPokemon = async (id: string): Promise<Pokemon> => {
 
   return data;
 };
+
+export default getPokemon;

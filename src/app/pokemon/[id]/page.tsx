@@ -1,14 +1,14 @@
 import Image from 'next/image';
-import { getPokemon } from 'services/pokemon-details';
+import { getPokemonDetails } from 'services';
 import Link from 'next/link';
-import { padNumber } from 'utils/pad-number';
+import { padNumber } from 'utils';
 import './style.css';
 
 type Params = { id: string };
 
 export default async function PokemonDetailPage({ params }: { params: Promise<Params> }) {
   const { id } = await params;
-  const pokemon = await getPokemon(id);
+  const pokemon = await getPokemonDetails(id);
 
   const img =
     pokemon.sprites.other?.['official-artwork']?.front_default ??
