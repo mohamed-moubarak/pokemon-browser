@@ -23,7 +23,7 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
   });
 
   if (!pokemonList || pokemonList.length === 0) {
-    return <p className="text-gray-500">No Pokémon found.</p>;
+    return <p className="text-black">No Pokémon found.</p>;
   }
 
   return (
@@ -44,9 +44,9 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
       <div className="flex justify-between w-full mt-6">
         <Link
           href={`/pokemon-list/?page=${previous ? page - 1 : 1}&limit=${limit}`}
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${!previous ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 bg-[#FBFEFD] text-black rounded ${!previous ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-          Previous
+          {`< Previous`}
         </Link>
 
         <div className="flex items-center space-x-2">
@@ -54,10 +54,10 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
             <Link
               key={pageNum}
               href={`/pokemon-list/?page=${pageNum}&limit=${limit}`}
-              className={`px-3 py-2 rounded ${
+              className={`flex justify-center align-center px-3 py-2 min-w-[40px] min-h-[40px] rounded ${
                 page === pageNum
-                  ? 'bg-blue-700 text-white'
-                  : 'bg-blue-500 text-white hover:bg-blue-600'
+                  ? 'bg-black text-white'
+                  : 'bg-[#FBFEFD] text-black hover:bg-black hover:text-white'
               }`}
             >
               {pageNum}
@@ -66,13 +66,14 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
 
           {totalPages > 5 && (
             <>
-              <span className="text-gray-500">...</span>
+              <span className="text-black cursor-default">...</span>
+
               <Link
                 href={`/pokemon-list/?page=${totalPages}&limit=${limit}`}
                 className={`px-3 py-2 rounded ${
                   page === totalPages
-                    ? 'bg-blue-700 text-white'
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
+                    ? 'bg-black text-white'
+                    : 'bg-[#FBFEFD] text-black hover:bg-black hover:text-white'
                 }`}
               >
                 {totalPages}
@@ -82,13 +83,13 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
         </div>
         <Link
           href={`/pokemon-list/?page=${next ? page + 1 : 1}&limit=${limit}`}
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${!next ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 bg-[#FBFEFD] text-black hover:bg-black hover:text-white rounded ${!next ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
-          Next
+          {`Next >`}
         </Link>
       </div>
 
-      <p className="text-sm text-gray-500 mt-4">
+      <p className="text-sm text-black mt-4">
         Page {page} of {totalPages} ({limit} Pokémon shown)
       </p>
     </div>
