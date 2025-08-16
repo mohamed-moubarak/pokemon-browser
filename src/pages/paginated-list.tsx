@@ -1,4 +1,4 @@
-import PokemonBriefCard from 'components/PokemonBriefCard/pokemon-brief-card';
+import { BriefCard } from 'components';
 import Link from 'next/link';
 import { fetchPokemonList } from 'services/fetch-pokemon-list';
 
@@ -28,10 +28,11 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <ul className="grid grid-cols-4 gap-6 text-sm/6 text-center sm:text-left">
+      <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 text-sm/6 text-center sm:text-left w-full">
         {pokemonList.map((pokemon, index) => (
           <li key={pokemon.name} className="text-gray-800 dark:text-gray-200">
-            <PokemonBriefCard
+            <BriefCard
+              key={pokemon.name}
               name={pokemon.name}
               imageUrl={pokemon.image}
               number={offset + index + 1}
@@ -88,15 +89,7 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
       </div>
 
       <p className="text-sm text-gray-500 mt-4">
-        Page {page} of {totalPages} ({count} Pokémon total)
-      </p>
-      <p className="text-sm text-gray-500">
-        {previous
-          ? `Previous page: ${new URL(previous).searchParams.get('page')}`
-          : 'No previous page'}
-      </p>
-      <p className="text-sm text-gray-500">
-        {next ? `Next page: ${new URL(next).searchParams.get('page')}` : 'No next page'}
+        Page {page} of {totalPages} ({limit} Pokémon shown)
       </p>
     </div>
   );
