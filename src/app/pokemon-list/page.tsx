@@ -18,7 +18,7 @@ const PokemonListPaginatedPage = async ({
         <p className="text-sm text-gray-500">Discover and explore Pokémon with </p>
       </header>
 
-      <main className="flex flex-col gap-8 items-center w-full px-12">
+      <main className="flex flex-col gap-8 items-center w-full xl:px-50 lg:px-30 md:px-16 px-12 flex-1">
         <Suspense fallback={<PaginatedGridSkeleton limit={limit} />}>
           <PaginatedList page={page} limit={limit} />
         </Suspense>

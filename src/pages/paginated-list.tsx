@@ -27,8 +27,8 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 text-sm/6 text-center sm:text-left w-full">
+    <div className="flex flex-col items-center w-full flex-1">
+      <ul className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 text-sm/6 text-center sm:text-left w-full flex-1">
         {pokemonList.map((pokemon, index) => (
           <li key={pokemon.name} className="text-gray-800 dark:text-gray-200">
             <BriefCard
