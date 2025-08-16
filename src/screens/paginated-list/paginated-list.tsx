@@ -42,7 +42,7 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
       <div className="flex justify-between w-full mt-6">
         <Link
           href={`/pokemon-list/?page=${previous ? page - 1 : 1}&limit=${limit}`}
-          className={`px-4 py-2 bg-[#FBFEFD] text-black rounded ${!previous ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 bg-[#FBFEFD] text-black rounded ${!previous ? 'opacity-50 cursor-not-allowed  pointer-events-none' : ''}`}
         >
           {`< Previous`}
         </Link>
@@ -81,7 +81,7 @@ const PaginatedList: React.FC<PageProps> = async ({ page, limit }) => {
         </div>
         <Link
           href={`/pokemon-list/?page=${next ? page + 1 : 1}&limit=${limit}`}
-          className={`px-4 py-2 bg-[#FBFEFD] text-black hover:bg-black hover:text-white rounded ${!next ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`px-4 py-2 bg-[#FBFEFD] text-black hover:bg-black hover:text-white rounded ${!next ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
         >
           {`Next >`}
         </Link>
